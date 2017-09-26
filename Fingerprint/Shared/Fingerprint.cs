@@ -1,4 +1,4 @@
-﻿namespace Zebble.Plugin
+﻿namespace Zebble
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,11 @@
 
     public partial class Fingerprint
     {
-        public async Task CreateFingerprint()
+        IFingerprint CreateFingerprint()
         {
 
+            //return new FingerprintImplementation();
+            return null;
         }
     }
 }

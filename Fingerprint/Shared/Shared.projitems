@@ -9,10 +9,12 @@
     <Import_RootNamespace>Zebble.Plugin</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Fingerprint.cs" />    
+    <Compile Include="$(MSBuildThisFileDirectory)Fingerprint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FingerprintImplementationBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IFingerprint.cs" />
     <None Include="$(MSBuildThisFileDirectory)Icon.png" />
     <None Include="$(MSBuildThisFileDirectory)MOVE-CONTENT-TO-ROOT\.gitignore" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\CreatePackage.bat" />
-  </ItemGroup>  
+  </ItemGroup>
 </Project>
