@@ -27,6 +27,5 @@ namespace Zebble
                 _implementation = new Lazy<IFingerprint>(CreateFP, LazyThreadSafetyMode.PublicationOnly);
             }
         }
-
     }
 }

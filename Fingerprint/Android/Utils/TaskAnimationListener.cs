@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using Android.Animation;
+using System.Threading.Tasks;
 
 namespace Fingerprint.Utils
 {
@@ -14,15 +14,9 @@ namespace Fingerprint.Utils
             _tcs = new TaskCompletionSource<int>();
         }
 
-        public void OnAnimationCancel(Animator animation)
-        {
-            _tcs.TrySetCanceled();
-        }
+        public void OnAnimationCancel(Animator animation) => _tcs.TrySetCanceled();
 
-        public void OnAnimationEnd(Animator animation)
-        {
-            _tcs.TrySetResult(0);
-        }
+        public void OnAnimationEnd(Animator animation) => _tcs.TrySetResult(0);
 
         public void OnAnimationRepeat(Animator animation)
         {

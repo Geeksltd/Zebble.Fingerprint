@@ -1,13 +1,13 @@
-using System.Threading;
-using System.Threading.Tasks;
 using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.Hardware.Fingerprints;
 using Android.OS;
-using Java.Lang;
-using Zebble;
 using Fingerprint.Contract;
+using Java.Lang;
+using System.Threading;
+using System.Threading.Tasks;
+using Zebble;
 
 namespace Fingerprint.Standard
 {

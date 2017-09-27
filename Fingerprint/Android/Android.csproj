@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <AndroidResource Include="Resources\layout\FingerprintDialog.axml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contract\AndroidFingerprintImplementationBase.cs" />
@@ -55,10 +54,7 @@
     <Compile Include="Contract\IAndroidFingerprintImplementation.cs" />
     <Compile Include="Contract\IAuthenticationCallback.cs" />
     <Compile Include="Contract\IAuthenticationFailedListener.cs" />
-    <Compile Include="Dialog\FingerprintDialogFragment.cs" />
-    <Compile Include="Fingerprint.Android.cs" />
     <Compile Include="Fingerprint.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Samsung\IdentifyListener.cs" />
     <Compile Include="Samsung\SamsungFingerprintImplementation.cs" />
     <Compile Include="Standard\FingerprintAuthenticationCallback.cs" />
@@ -74,19 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\fingerprint_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\fingerprint_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\fingerprint_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\fingerprint_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\fingerprint_white.png" />
+    <Folder Include="Dialog\" />
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

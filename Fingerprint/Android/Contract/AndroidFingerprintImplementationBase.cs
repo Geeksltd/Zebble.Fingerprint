@@ -11,11 +11,11 @@ namespace Fingerprint.Contract
     {
         protected override async Task<FingerprintAuthenticationResult> NativeAuthenticateAsync(AuthenticationRequestConfiguration authRequestConfig, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (authRequestConfig.UseDialog)
-            {
-                var fragment = Fingerprint.CreateDialogFragment();
-                return await fragment.ShowAsync(authRequestConfig, this, cancellationToken);
-            }
+            //if (authRequestConfig.UseDialog)
+            //{
+            //    var fragment = Fingerprint.CreateDialogFragment();
+            //    return await fragment.ShowAsync(authRequestConfig, this, cancellationToken);
+            //}
 
             return await AuthenticateNoDialogAsync(new DeafAuthenticationFailedListener(), cancellationToken);
         }

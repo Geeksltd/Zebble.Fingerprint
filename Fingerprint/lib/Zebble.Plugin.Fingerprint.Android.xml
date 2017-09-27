@@ -9,6 +9,47 @@
             Base implementation for the Android implementations.
             </summary>
         </member>
+        <member name="T:Zebble.FingerprintAvailability">
+            <summary>
+            Indicates if a fingerprint authentication can be performed.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.Available">
+            <summary>
+            Fingerprint authentication can be used.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.NoImplementation">
+            <summary>
+            This plugin has no implementation for the current platform.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.NoApi">
+            <summary>
+            Operating system has no supported fingerprint API.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.NoPermission">
+            <summary>
+            App is not allowed to access the fingerprint sensor.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.NoSensor">
+            <summary>
+            Device has no fingerprint sensor.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.NoFingerprint">
+            <summary>
+            Fingerprint has not been set up.
+            </summary>
+        </member>
+        <member name="F:Zebble.FingerprintAvailability.Unknown">
+            <summary>
+            An unknown, platform specific error occurred. Availability status could not be 
+            mapped to a <see cref="T:Zebble.FingerprintAvailability"/>.
+            </summary>
+        </member>
         <member name="M:Zebble.IFingerprint.GetAvailabilityAsync(System.Boolean)">
             <summary>
             Checks the availability of fingerprint authentication.
@@ -52,47 +93,6 @@
             <param name="authRequestConfig">Configuration of the dialog that is displayed to the user.</param>
             <param name="cancellationToken">Token used to cancel the operation.</param>
             <returns>Authentication result</returns>
-        </member>
-        <member name="T:Zebble.FingerprintAvailability">
-            <summary>
-            Indicates if a fingerprint authentication can be performed.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.Available">
-            <summary>
-            Fingerprint authentication can be used.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.NoImplementation">
-            <summary>
-            This plugin has no implementation for the current platform.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.NoApi">
-            <summary>
-            Operating system has no supported fingerprint API.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.NoPermission">
-            <summary>
-            App is not allowed to access the fingerprint sensor.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.NoSensor">
-            <summary>
-            Device has no fingerprint sensor.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.NoFingerprint">
-            <summary>
-            Fingerprint has not been set up.
-            </summary>
-        </member>
-        <member name="F:Zebble.FingerprintAvailability.Unknown">
-            <summary>
-            An unknown, platform specific error occurred. Availability status could not be 
-            mapped to a <see cref="T:Zebble.FingerprintAvailability"/>.
-            </summary>
         </member>
         <member name="P:Zebble.FingerprintAuthenticationResult.Authenticated">
             <summary>

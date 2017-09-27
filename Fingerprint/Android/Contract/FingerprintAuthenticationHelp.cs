@@ -1,4 +1,4 @@
-﻿namespace Fingerprint.Contract
+namespace Fingerprint.Contract
 {
     public enum FingerprintAuthenticationHelp
     {

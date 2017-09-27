@@ -1,6 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,12 +18,10 @@ namespace Zebble
             return await NativeAuthenticateAsync(authRequestConfig, cancellationToken);
         }
 
-        public async Task<bool> IsAvailableAsync(bool allowAlternativeAuthentication = false)
-        {
-            return await GetAvailabilityAsync(allowAlternativeAuthentication) == FingerprintAvailability.Available;
-        }
+        public async Task<bool> IsAvailableAsync(bool allowAlternativeAuthentication = false) => await GetAvailabilityAsync(allowAlternativeAuthentication) == FingerprintAvailability.Available;
 
         public abstract Task<FingerprintAvailability> GetAvailabilityAsync(bool allowAlternativeAuthentication = false);
+
         protected abstract Task<FingerprintAuthenticationResult> NativeAuthenticateAsync(AuthenticationRequestConfiguration authRequestConfig, CancellationToken cancellationToken);
     }
 }

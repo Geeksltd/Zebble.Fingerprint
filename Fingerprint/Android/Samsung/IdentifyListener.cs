@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
 using Com.Samsung.Android.Sdk.Pass;
 using Fingerprint.Contract;
+using System;
+using System.Threading.Tasks;
 using Zebble;
 
 namespace Fingerprint.Samsung
@@ -43,23 +43,20 @@ namespace Fingerprint.Samsung
             });
         }
 
-        private async Task<bool> StartIdentify()
-        {
-            // TODO: use task completion source instead of retries in SamsungFingerprintImplementation, if samsung fixes the library 
-            //_completedSource = new TaskCompletionSource<int>();
-            return await _startIdentify(this);
-        }
+        // TODO: use task completion source instead of retries in SamsungFingerprintImplementation, if samsung fixes the library 
+        //_completedSource = new TaskCompletionSource<int>();
+        private async Task<bool> StartIdentify() => await _startIdentify(this);
 
         public void OnCompleted()
         {
-            //_completedSource?.TrySetResult(0);
+            // _completedSource?.TrySetResult(0);
         }
 
         public async void OnFinished(SpassFingerprintStatus status)
         {
             //_completedSource = new TaskCompletionSource<int>();
             var resultStatus = GetResultStatus(status);
-            
+
             if (resultStatus == FingerprintAuthenticationResultStatus.Failed && _retriesLeft > 0)
             {
                 _failedListener?.OnFailedTry();
@@ -69,7 +66,7 @@ namespace Fingerprint.Samsung
                     _retriesLeft--;
 
                     //await _completedSource.Task;
-                
+
                     if (await StartIdentify())
                         return;
                 }
@@ -99,33 +96,23 @@ namespace Fingerprint.Samsung
             FingerprintAuthenticationResultStatus resultStatus;
             switch (status)
             {
+                case SpassFingerprintStatus.PasswordSuccess:
                 case SpassFingerprintStatus.Success:
                     resultStatus = FingerprintAuthenticationResultStatus.Succeeded;
                     break;
+                case SpassFingerprintStatus.QualityFailed:
+                case SpassFingerprintStatus.Failed:
                 case SpassFingerprintStatus.TimeoutFailed:
                 case SpassFingerprintStatus.SensorFailed:
                     resultStatus = FingerprintAuthenticationResultStatus.Failed;
                     break;
+                case SpassFingerprintStatus.UserCancelledByTouchOutside:
+                case SpassFingerprintStatus.ButtonPressed:
                 case SpassFingerprintStatus.UserCancelled:
                     resultStatus = FingerprintAuthenticationResultStatus.Canceled;
                     break;
-                case SpassFingerprintStatus.ButtonPressed:
-                    resultStatus = FingerprintAuthenticationResultStatus.Canceled;
-                    break;
-                case SpassFingerprintStatus.QualityFailed:
-                    resultStatus = FingerprintAuthenticationResultStatus.Failed;
-                    break;
-                case SpassFingerprintStatus.UserCancelledByTouchOutside:
-                    resultStatus = FingerprintAuthenticationResultStatus.Canceled;
-                    break;
-                case SpassFingerprintStatus.Failed:
-                    resultStatus = FingerprintAuthenticationResultStatus.Failed;
-                    break;
                 case SpassFingerprintStatus.OperationDenied:
                     resultStatus = FingerprintAuthenticationResultStatus.UnknownError;
-                    break;
-                case SpassFingerprintStatus.PasswordSuccess:
-                    resultStatus = FingerprintAuthenticationResultStatus.Succeeded;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(status), status, null);

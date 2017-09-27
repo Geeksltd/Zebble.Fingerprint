@@ -1,16 +1,15 @@
-using System;
-using System.Threading.Tasks;
 using Android.Hardware.Fingerprints;
-using Java.Lang;
 using Fingerprint.Contract;
+using Java.Lang;
+using System.Threading.Tasks;
 using Zebble;
 
 namespace Fingerprint.Standard
 {
     public class FingerprintAuthenticationCallback : FingerprintManager.AuthenticationCallback, IAuthenticationCallback
     {
-        private readonly IAuthenticationFailedListener _listener;
-        private readonly TaskCompletionSource<FingerprintAuthenticationResult> _taskCompletionSource;
+        readonly IAuthenticationFailedListener _listener;
+        readonly TaskCompletionSource<FingerprintAuthenticationResult> _taskCompletionSource;
 
         public FingerprintAuthenticationCallback(IAuthenticationFailedListener listener)
         {
@@ -18,17 +17,13 @@ namespace Fingerprint.Standard
             _taskCompletionSource = new TaskCompletionSource<FingerprintAuthenticationResult>();
         }
 
-        public Task<FingerprintAuthenticationResult> GetTask()
-        {
-            return _taskCompletionSource.Task;
-        }
+        public Task<FingerprintAuthenticationResult> GetTask() => _taskCompletionSource.Task;
 
-        // https://developer.android.com/reference/android/hardware/fingerprint/FingerprintManager.AuthenticationCallback.html
-        public override void OnAuthenticationSucceeded(FingerprintManager.AuthenticationResult res)
+
+        public override void OnAuthenticationSucceeded(FingerprintManager.AuthenticationResult result)
         {
-            base.OnAuthenticationSucceeded(res);
-            var result = new FingerprintAuthenticationResult { Status = FingerprintAuthenticationResultStatus.Succeeded };
-            SetResultSafe(result);
+            base.OnAuthenticationSucceeded(result);
+            SetResultSafe(new FingerprintAuthenticationResult { Status = FingerprintAuthenticationResultStatus.Succeeded });
         }
 
         public override void OnAuthenticationError(FingerprintState errorCode, ICharSequence errString)
@@ -45,7 +40,7 @@ namespace Fingerprint.Standard
             SetResultSafe(result);
         }
 
-        private void SetResultSafe(FingerprintAuthenticationResult result)
+        void SetResultSafe(FingerprintAuthenticationResult result)
         {
             if (!(_taskCompletionSource.Task.IsCanceled || _taskCompletionSource.Task.IsCompleted || _taskCompletionSource.Task.IsFaulted))
             {

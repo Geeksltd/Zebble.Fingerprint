@@ -1,6 +1,5 @@
-using System.Threading.Tasks;
 using Android.Animation;
-
+using System.Threading.Tasks;
 
 namespace Fingerprint.Utils
 {

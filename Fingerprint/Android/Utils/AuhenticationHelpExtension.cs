@@ -1,7 +1,5 @@
-﻿using System;
-using Android.Provider;
-using Zebble;
 using Fingerprint.Contract;
+using Zebble;
 
 namespace Fingerprint.Utils
 {
@@ -22,6 +20,8 @@ namespace Fingerprint.Utils
                     return texts.Insufficient;
                 case FingerprintAuthenticationHelp.Dirty when !string.IsNullOrEmpty(texts.Dirty):
                     return texts.Dirty;
+                default:
+                    break;
             }
 
             return nativeText;

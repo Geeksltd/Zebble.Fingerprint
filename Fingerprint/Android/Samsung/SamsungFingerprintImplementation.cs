@@ -1,21 +1,20 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Com.Samsung.Android.Sdk.Pass;
-using Zebble;
-using System.Security;
-using System;
-using Fingerprint.Contract;
 using Android.App;
+using Android.Util;
+using Com.Samsung.Android.Sdk.Pass;
+using Fingerprint.Contract;
 using Java.Lang;
+using System.Threading;
+using System.Threading.Tasks;
+using Zebble;
 
 namespace Fingerprint.Samsung
 {
     public class SamsungFingerprintImplementation : AndroidFingerprintImplementationBase
     {
-        private readonly bool _hasNoApi;
-        private readonly bool _hasNoPermission;
-        private readonly bool _hasNoFingerPrintSensor;
-        private readonly SpassFingerprint _spassFingerprint;
+        readonly bool _hasNoApi;
+        readonly bool _hasNoPermission;
+        readonly bool _hasNoFingerPrintSensor;
+        readonly SpassFingerprint _spassFingerprint;
 
         internal bool IsCompatible { get; }
 
@@ -29,14 +28,14 @@ namespace Fingerprint.Samsung
                 _spassFingerprint = new SpassFingerprint(Application.Context);
                 IsCompatible = true;
             }
-            catch (System.Security.SecurityException ex)
+            catch (SecurityException ex)
             {
-                //Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                 _hasNoPermission = true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                //Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                 _hasNoApi = true;
             }
         }
@@ -51,22 +50,22 @@ namespace Fingerprint.Samsung
             }
         }
 
-        private void TryCancel(IdentifyListener identifyListener)
+        void TryCancel(IdentifyListener identifyListener)
         {
             try
             {
                 _spassFingerprint.CancelIdentify();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 // #75: should be fixed with the reordering of the base.OnPause() in the dialog, but
                 // to avoid crashes in other cases, we ignore exceptions here and return cancelled instead
-                //Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                 identifyListener.CancelManually();
             }
         }
 
-        private async Task<bool> StartIdentify(SpassFingerprint.IIdentifyListener listener)
+        async Task<bool> StartIdentify(SpassFingerprint.IIdentifyListener listener)
         {
             // TODO: remove retry and delay, if samsung fixes the library 
             for (var i = 0; i < 5; i++)
@@ -78,12 +77,12 @@ namespace Fingerprint.Samsung
                 }
                 catch (IllegalStateException ex)
                 {
-                    // Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                    Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                     await Task.Delay(100);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
-                    // Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                    Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                     return false;
                 }
             }
@@ -111,12 +110,12 @@ namespace Fingerprint.Samsung
             }
             catch (UnsupportedOperationException ex)
             {
-                // Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                 Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                 return FingerprintAvailability.NoSensor;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                //Log.Warn(nameof(SamsungFingerprintImplementation), ex);
+                Log.Warn(nameof(SamsungFingerprintImplementation), ex);
                 return FingerprintAvailability.Unknown;
             }
 

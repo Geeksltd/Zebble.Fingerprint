@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Fingerprint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FingerprintAuthenticationResultStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FingerprintAvailability.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FingerprintImplementationBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IFingerprint.cs" />
     <None Include="$(MSBuildThisFileDirectory)Icon.png" />

@@ -1,13 +1,9 @@
 namespace Zebble
 {
     using System;
-    using System.ComponentModel;
-    using Zebble;
-    using Windows.UI;
-    using System.Threading.Tasks;
-    using Windows.UI.Xaml;
-    using Windows.Security.Credentials.UI;
     using System.Threading;
+    using System.Threading.Tasks;
+    using Windows.Security.Credentials.UI;
 
     public partial class Fingerprint
     {

@@ -1,6 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,49 +50,12 @@ namespace Zebble
         Task<FingerprintAuthenticationResult> AuthenticateAsync(AuthenticationRequestConfiguration authRequestConfig, CancellationToken cancellationToken = default(CancellationToken));
     }
 
-    /// <summary>
-    /// Indicates if a fingerprint authentication can be performed.
-    /// </summary>
-    public enum FingerprintAvailability
-    {
-        /// <summary>
-        /// Fingerprint authentication can be used.
-        /// </summary>
-        Available,
-        /// <summary>
-        /// This plugin has no implementation for the current platform.
-        /// </summary>
-        NoImplementation,
-        /// <summary>
-        /// Operating system has no supported fingerprint API.
-        /// </summary>
-        NoApi,
-        /// <summary>
-        /// App is not allowed to access the fingerprint sensor.
-        /// </summary>
-        NoPermission,
-        /// <summary>
-        /// Device has no fingerprint sensor.
-        /// </summary>
-        NoSensor,
-        /// <summary>
-        /// Fingerprint has not been set up.
-        /// </summary>
-        NoFingerprint,
-        /// <summary>
-        /// An unknown, platform specific error occurred. Availability status could not be 
-        /// mapped to a <see cref="FingerprintAvailability"/>.
-        /// </summary>
-        Unknown
-    }
-
     public class FingerprintAuthenticationResult
     {
         /// <summary>
         /// Indicatates whether the authentication was successful or not.
         /// </summary>
-        public bool Authenticated { get { return Status == FingerprintAuthenticationResultStatus.Succeeded; } }
-
+        public bool Authenticated => Status == FingerprintAuthenticationResultStatus.Succeeded;
         /// <summary>
         /// Detailed information of the authentication.
         /// </summary>
@@ -183,18 +143,4 @@ namespace Zebble
         /// </summary>
         public string Dirty { get; set; }
     }
-
-    public enum FingerprintAuthenticationResultStatus
-    {
-        Unknown,
-        Succeeded,
-        FallbackRequested,
-        Failed,
-        Canceled,
-        TooManyAttempts,
-        UnknownError,
-        NotAvailable
-    }
-
-
 }
