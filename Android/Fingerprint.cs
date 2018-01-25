@@ -1,8 +1,8 @@
 ﻿namespace Zebble.Device
 {
-    using System.Threading.Tasks;
     using Android.Hardware.Fingerprints;
     using Android.OS;
+    using System.Threading.Tasks;
     using Zebble.Device.FingerPrint.Samsung;
 
     public partial class Fingerprint

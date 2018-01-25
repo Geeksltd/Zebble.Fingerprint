@@ -1,23 +1,23 @@
 namespace Zebble.Device.FingerPrint.Samsung
 {
+    using Com.Samsung.Android.Sdk.Pass;
     using System;
     using System.Threading.Tasks;
-    using Com.Samsung.Android.Sdk.Pass;
 
     public class IdentifyListener : Java.Lang.Object, SpassFingerprint.IIdentifyListener
     {
-        private readonly Func<SpassFingerprint.IIdentifyListener, Task<bool>> _startIdentify;
-        private readonly IAuthenticationFailedListener _failedListener;
-        private readonly TaskCompletionSource<FingerprintResult> _taskCompletionSource;
-        private int _retriesLeft;
-        //private TaskCompletionSource<int> _completedSource;
+        readonly Func<SpassFingerprint.IIdentifyListener, Task<bool>> startIdentify;
+        readonly IAuthenticationFailedListener failedListener;
+        readonly TaskCompletionSource<FingerprintResult> taskCompletionSource;
+        int retriesLeft;
+        // private TaskCompletionSource<int> _completedSource;
 
         public IdentifyListener(Func<SpassFingerprint.IIdentifyListener, Task<bool>> startIdentify, IAuthenticationFailedListener failedListener)
         {
-            _retriesLeft = 2;
-            _startIdentify = startIdentify;
-            _failedListener = failedListener;
-            _taskCompletionSource = new TaskCompletionSource<FingerprintResult>();
+            retriesLeft = 2;
+            this.startIdentify = startIdentify;
+            this.failedListener = failedListener;
+            taskCompletionSource = new TaskCompletionSource<FingerprintResult>();
         }
 
         public async Task<FingerprintResult> GetTask()
@@ -30,20 +30,20 @@ namespace Zebble.Device.FingerPrint.Samsung
                 };
             }
 
-            return await _taskCompletionSource.Task;
+            return await taskCompletionSource.Task;
         }
 
         public void CancelManually()
         {
-            _taskCompletionSource.TrySetResult(new FingerprintResult
+            taskCompletionSource.TrySetResult(new FingerprintResult
             {
                 Status = FingerprintCheckStatus.Canceled
             });
         }
 
         // TODO: use task completion source instead of retries in SamsungFingerprintImplementation, if samsung fixes the library 
-        //_completedSource = new TaskCompletionSource<int>();
-        private async Task<bool> StartIdentify() => await _startIdentify(this);
+        // _completedSource = new TaskCompletionSource<int>();
+        async Task<bool> StartIdentify() => await startIdentify(this);
 
         public void OnCompleted()
         {
@@ -52,29 +52,29 @@ namespace Zebble.Device.FingerPrint.Samsung
 
         public async void OnFinished(SpassFingerprintStatus status)
         {
-            //_completedSource = new TaskCompletionSource<int>();
+            // _completedSource = new TaskCompletionSource<int>();
             var resultStatus = GetResultStatus(status);
 
-            if (resultStatus == FingerprintCheckStatus.Failed && _retriesLeft > 0)
+            if (resultStatus == FingerprintCheckStatus.Failed && retriesLeft > 0)
             {
-                _failedListener?.OnFailedTry();
+                failedListener?.OnFailedTry();
 
-                if (_retriesLeft > 0)
+                if (retriesLeft > 0)
                 {
-                    _retriesLeft--;
+                    retriesLeft--;
 
-                    //await _completedSource.Task;
+                    // await _completedSource.Task;
 
                     if (await StartIdentify())
                         return;
                 }
             }
-            else if (resultStatus == FingerprintCheckStatus.Failed && _retriesLeft <= 0)
+            else if (resultStatus == FingerprintCheckStatus.Failed && retriesLeft <= 0)
             {
                 resultStatus = FingerprintCheckStatus.TooManyAttempts;
             }
 
-            _taskCompletionSource.TrySetResult(new FingerprintResult
+            taskCompletionSource.TrySetResult(new FingerprintResult
             {
                 Status = resultStatus
             });
@@ -82,7 +82,6 @@ namespace Zebble.Device.FingerPrint.Samsung
 
         public void OnReady()
         {
-
         }
 
         public void OnStarted()
@@ -90,7 +89,7 @@ namespace Zebble.Device.FingerPrint.Samsung
             // TODO: OnStarted -> OnCompleted = failed (to short touched) OMG 
         }
 
-        private static FingerprintCheckStatus GetResultStatus(SpassFingerprintStatus status)
+        static FingerprintCheckStatus GetResultStatus(SpassFingerprintStatus status)
         {
             FingerprintCheckStatus resultStatus;
             switch (status)
@@ -116,6 +115,7 @@ namespace Zebble.Device.FingerPrint.Samsung
                 default:
                     throw new ArgumentOutOfRangeException(nameof(status), status, null);
             }
+
             return resultStatus;
         }
     }

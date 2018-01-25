@@ -1,9 +1,9 @@
 namespace Zebble.Device
 {
-    using System.Threading.Tasks;
     using Foundation;
     using LocalAuthentication;
     using ObjCRuntime;
+    using System.Threading.Tasks;
 
     public partial class Fingerprint
     {

@@ -9,10 +9,10 @@ namespace Zebble.Device.FingerPrint.Samsung
 
     public class SamsungFingerPrint
     {
-        readonly bool _hasNoApi;
-        readonly bool _hasNoPermission;
-        readonly bool _hasNoFingerPrintSensor;
-        readonly SpassFingerprint _spassFingerprint;
+        readonly bool hasNoApi;
+        readonly bool hasNoPermission;
+        readonly bool hasNoFingerPrintSensor;
+        readonly SpassFingerprint spassFingerprint;
 
         internal bool IsCompatible { get; }
 
@@ -22,19 +22,19 @@ namespace Zebble.Device.FingerPrint.Samsung
             {
                 var spass = new Spass();
                 spass.Initialize(Application.Context);
-                _hasNoFingerPrintSensor = !spass.IsFeatureEnabled(Spass.DeviceFingerprint);
-                _spassFingerprint = new SpassFingerprint(Application.Context);
+                hasNoFingerPrintSensor = !spass.IsFeatureEnabled(Spass.DeviceFingerprint);
+                spassFingerprint = new SpassFingerprint(Application.Context);
                 IsCompatible = true;
             }
             catch (SecurityException ex)
             {
                 Log.Warn(nameof(SamsungFingerPrint), ex);
-                _hasNoPermission = true;
+                hasNoPermission = true;
             }
             catch (Exception ex)
             {
                 Log.Warn(nameof(SamsungFingerPrint), ex);
-                _hasNoApi = true;
+                hasNoApi = true;
             }
         }
 
@@ -43,9 +43,8 @@ namespace Zebble.Device.FingerPrint.Samsung
             var identifyListener = new IdentifyListener(StartIdentify, failedListener);
 
             using (cancellationToken.Register(() => TryCancel(identifyListener)))
-            {
                 return await identifyListener.GetTask();
-            }
+
         }
 
         internal async Task<bool> IsAvailable(bool allowAlternativeAuthentication = true)
@@ -54,10 +53,10 @@ namespace Zebble.Device.FingerPrint.Samsung
 
             try
             {
-                if (_hasNoApi || _hasNoPermission || _hasNoFingerPrintSensor) resutl = false;
+                if (hasNoApi || hasNoPermission || hasNoFingerPrintSensor) resutl = false;
                 // On some devices, Samsung doesn't fulfill the API contract of IsFeatureEnabled.
                 // This will cause a UnsupportedOperationException when calling HasRegisteredFinger see #53, #70
-                else if (!_spassFingerprint.HasRegisteredFinger) resutl = false;
+                else if (!spassFingerprint.HasRegisteredFinger) resutl = false;
             }
             catch (UnsupportedOperationException ex)
             {
@@ -77,7 +76,7 @@ namespace Zebble.Device.FingerPrint.Samsung
         {
             try
             {
-                _spassFingerprint.CancelIdentify();
+                spassFingerprint.CancelIdentify();
             }
             catch (Exception ex)
             {
@@ -95,7 +94,7 @@ namespace Zebble.Device.FingerPrint.Samsung
             {
                 try
                 {
-                    _spassFingerprint.StartIdentify(listener);
+                    spassFingerprint.StartIdentify(listener);
                     return true;
                 }
                 catch (IllegalStateException ex)

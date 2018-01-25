@@ -5,12 +5,12 @@
 
 ![logo]
 
-FingerPrint is an authentication plugin for Zebble applications.
+FingerPrint is an authentication plugin using device FingerPrint.
 
 
 [![NuGet](https://img.shields.io/nuget/v/Zebble.FingerPrint.svg?label=NuGet)](https://www.nuget.org/packages/Zebble.FingerPrint/)
 
-> This plugin makes you able to authenticate users and access to device FingerPrint in Android, IOS, and UWP platforms.
+> This plugin makes you able to authenticate users and access to device FingerPrint in Android, iOS, and UWP platforms.
 
 <br>
 
