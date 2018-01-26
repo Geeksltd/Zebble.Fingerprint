@@ -13,7 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)FingerprintCheckStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FingerprintRequestConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FingerprintResult.cs" />
-    <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.exe" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\NuGet.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)NuGet\CreatePackage.bat" />
   </ItemGroup>

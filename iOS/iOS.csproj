@@ -8,9 +8,9 @@
     <ProjectGuid>{DE22BDD6-E154-4B97-B2ED-621F95A5B9AE}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>Zebble.Plugin.Renderer</RootNamespace>
+    <RootNamespace>Zebble</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Zebble.Plugin.Fingerprint.iOS</AssemblyName>
+    <AssemblyName>Zebble.Fingerprint.iOS</AssemblyName>
     <OutputPath>..\lib\</OutputPath>
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;IOS;</DefineConstants>
   </PropertyGroup>
@@ -23,7 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DocumentationFile>..\lib\Zebble.Plugin.Fingerprint.iOS.xml</DocumentationFile>
+    <DocumentationFile>..\lib\Zebble.Fingerprint.iOS.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -42,7 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Zebble.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Zebble.4.3.101\lib\Xamarin.iOS10\Zebble.iOS.dll</HintPath>
+      <HintPath>..\packages\Zebble.4.4.100\lib\Xamarin.iOS10\Zebble.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
