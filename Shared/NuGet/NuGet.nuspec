@@ -16,6 +16,10 @@
     <file src="..\..\lib\Zebble.FingerPrint.iOS.*" target="lib\Xamarin.iOS10\" />
     <file src="..\..\lib\Plugin.Fingerprint.Android.Samsung.*" target="lib\MonoAndroid10\" />
     <file src="..\..\lib\Zebble.FingerPrint.Android.*" target="lib\MonoAndroid10\" />
-    <file src="..\..\lib\Zebble.FingerPrint.UWP.*" target="lib\UAP10\" />
+    <file src="..\..\lib\bin\ARM\Release\Zebble.FingerPrint.UWP.*" target="runtimes\win10-arm\lib\uap10.0" />
+    <file src="..\..\lib\bin\x64\Release\Zebble.FingerPrint.UWP.*" target="runtimes\win10-x64\lib\uap10.0" />
+    <file src="..\..\lib\bin\x86\Release\Zebble.FingerPrint.UWP.*" target="runtimes\win10-x86\lib\uap10.0" />
+
+    <file src="..\..\lib\bin\Release\Zebble.FingerPrint.UWP.*" target="ref\uap10.0" />
   </files>
 </package>
