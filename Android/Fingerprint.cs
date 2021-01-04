@@ -1,4 +1,6 @@
-﻿namespace Zebble.Device
+﻿using Zebble.Device.Samsung;
+
+namespace Zebble.Device
 {
     using Android.Hardware.Fingerprints;
     using Android.OS;
@@ -26,15 +28,13 @@
         {
             if (SamsungDevice != null)
                 return SamsungDevice.IsAvailable(allowAlternativeAuthentication);
-            else
-            {
-                if (OS.IsAtLeast(BuildVersionCodes.M))
-                {
-                    var service = GetService();
 
-                    if (service.IsHardwareDetected && service.HasEnrolledFingerprints)
-                        return Task.FromResult(result: true);
-                }
+            if (OS.IsAtLeast(BuildVersionCodes.M))
+            {
+                var service = GetService();
+
+                if (service.IsHardwareDetected && service.HasEnrolledFingerprints)
+                    return Task.FromResult(result: true);
             }
 
             return Task.FromResult(result: false);

@@ -4,6 +4,7 @@ namespace Zebble.Device
     using LocalAuthentication;
     using ObjCRuntime;
     using System.Threading.Tasks;
+    using Olive;
 
     public partial class Fingerprint
     {
@@ -67,7 +68,7 @@ namespace Zebble.Device
             {
                 case LAStatus.AuthenticationFailed:
                     var description = error.Description;
-                    if (description != null && description.Contains("retry limit exceeded"))
+                    if (description.HasValue() && description.Contains("retry limit exceeded"))
                         return FingerprintCheckStatus.TooManyAttempts;
                     else
                         return FingerprintCheckStatus.Failed;

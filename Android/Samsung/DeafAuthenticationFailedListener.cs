@@ -1,6 +1,6 @@
-namespace Zebble.Device.FingerPrint.Samsung
+namespace Zebble.Device.Samsung
 {
-    internal class DeafAuthenticationFailedListener : IAuthenticationFailedListener
+    class DeafAuthenticationFailedListener : IAuthenticationFailedListener
     {
         public void OnFailedTry()
         {

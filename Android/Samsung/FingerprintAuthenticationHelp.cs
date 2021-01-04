@@ -1,4 +1,4 @@
-namespace Zebble.Device.FingerPrint.Samsung
+namespace Zebble.Device.Samsung
 {
     public enum FingerprintAuthenticationHelp
     {

@@ -1,22 +1,22 @@
-[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.FingerPrint/master/Shared/NuGet/Icon.png "Zebble.FingerPrint"
+﻿[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.Fingerprint/master/icon.png "Zebble.Fingerprint"
 
 
-## Zebble.FingerPrint
+## Zebble.Fingerprint
 
 ![logo]
 
-FingerPrint is an authentication plugin using device FingerPrint.
+Fingerprint is an authentication plugin using device Fingerprint.
 
 
-[![NuGet](https://img.shields.io/nuget/v/Zebble.FingerPrint.svg?label=NuGet)](https://www.nuget.org/packages/Zebble.FingerPrint/)
+[![NuGet](https://img.shields.io/nuget/v/Zebble.Fingerprint.svg?label=NuGet)](https://www.nuget.org/packages/Zebble.Fingerprint/)
 
-> This plugin makes you able to authenticate users and access to device FingerPrint in Android, iOS, and UWP platforms.
+> This plugin makes you able to authenticate users and access to device Fingerprint in Android, iOS, and UWP platforms.
 
 <br>
 
 
 ### Setup
-* Available on NuGet: [https://www.nuget.org/packages/Zebble.FingerPrint/](https://www.nuget.org/packages/Zebble.FingerPrint/)
+* Available on NuGet: [https://www.nuget.org/packages/Zebble.Fingerprint/](https://www.nuget.org/packages/Zebble.Fingerprint/)
 * Install in your platform client projects.
 * Available for iOS, Android and UWP.
 <br>

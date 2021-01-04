@@ -1,6 +1,6 @@
-namespace Zebble.Device.FingerPrint.Samsung
+namespace Zebble.Device.Samsung
 {
-    public interface IAuthenticationFailedListener
+    interface IAuthenticationFailedListener
     {
         void OnFailedTry();
         void OnHelp(FingerprintAuthenticationHelp help, string nativeHelpText);

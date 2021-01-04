@@ -1,18 +1,18 @@
-namespace Zebble.Device.FingerPrint.Samsung
+namespace Zebble.Device.Samsung
 {
     using Android.App;
     using Android.Util;
-    using Com.Samsung.Android.Sdk.Pass;
+    using Plugin.Fingerprint;
     using Java.Lang;
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class SamsungFingerPrint
+    class SamsungFingerPrint
     {
         readonly bool hasNoApi;
         readonly bool hasNoPermission;
         readonly bool hasNoFingerPrintSensor;
-        readonly SpassFingerprint spassFingerprint;
+        readonly CrossFingerprint spassFingerprint;
 
         internal bool IsCompatible { get; }
 
@@ -23,7 +23,7 @@ namespace Zebble.Device.FingerPrint.Samsung
                 var spass = new Spass();
                 spass.Initialize(Application.Context);
                 hasNoFingerPrintSensor = !spass.IsFeatureEnabled(Spass.DeviceFingerprint);
-                spassFingerprint = new SpassFingerprint(Application.Context);
+                spassFingerprint = new CrossFingerprint() SpassFingerprint(Application.Context);
                 IsCompatible = true;
             }
             catch (SecurityException ex)
@@ -76,7 +76,7 @@ namespace Zebble.Device.FingerPrint.Samsung
         {
             try
             {
-                spassFingerprint.CancelIdentify();
+                spassFingerprint.;
             }
             catch (Exception ex)
             {

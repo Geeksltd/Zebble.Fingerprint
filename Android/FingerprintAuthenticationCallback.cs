@@ -5,6 +5,7 @@
     using System;
     using System.Threading.Tasks;
     using static Android.Hardware.Fingerprints.FingerprintManager;
+    using Olive;
 
     class FingerprintAuthenticationCallback : AuthenticationCallback
     {

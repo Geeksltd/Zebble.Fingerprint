@@ -1,10 +1,10 @@
-namespace Zebble.Device.FingerPrint.Samsung
+namespace Zebble.Device.Samsung
 {
     using Com.Samsung.Android.Sdk.Pass;
     using System;
     using System.Threading.Tasks;
 
-    public class IdentifyListener : Java.Lang.Object, SpassFingerprint.IIdentifyListener
+    class IdentifyListener : Java.Lang.Object, SpassFingerprint.IIdentifyListener
     {
         readonly Func<SpassFingerprint.IIdentifyListener, Task<bool>> startIdentify;
         readonly IAuthenticationFailedListener failedListener;
