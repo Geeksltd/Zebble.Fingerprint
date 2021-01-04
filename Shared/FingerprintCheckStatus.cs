@@ -9,6 +9,7 @@
         Canceled,
         TooManyAttempts,
         UnknownError,
-        NotAvailable
+        NotAvailable,
+        Denied
     }
 }

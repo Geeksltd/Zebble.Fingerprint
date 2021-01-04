@@ -2,27 +2,35 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Plugin.Fingerprint;
 
     public static partial class Fingerprint
     {
-        public static async Task<FingerprintResult> Authenticate(string reason,
-            FingerprintRequestConfig requestConfig = null,
-            OnError errorAction = OnError.Alert)
+        public static Task<bool> IsAvailable(bool allowAlternativeAuthentication)
         {
-            requestConfig ??= new FingerprintRequestConfig();
-            requestConfig.Reason = reason;
+            return CrossFingerprint.Current.IsAvailableAsync(allowAlternativeAuthentication);
+        }
+
+        public static async Task<FingerprintResult> Authenticate(FingerprintRequestConfig request, OnError errorAction = OnError.Alert)
+        {
+            if (request is null)
+                throw new ArgumentNullException(nameof(request));
 
             try
             {
-                if (!await IsAvailable(requestConfig.AllowAlternativeAuthentication))
-                    return new FingerprintResult { Status = FingerprintCheckStatus.NotAvailable };
+                var config = request.ToConfiguration();
+                var result = await CrossFingerprint.Current.AuthenticateAsync(config, request.CancellationToken);
 
-                return await DoAuthenticate(requestConfig);
+                return FingerprintResult.From(result);
             }
             catch (Exception ex)
             {
-                await errorAction.Apply(ex, "Failed to access fingerprint : " + ex.Message);
-                return null;
+                await errorAction.Apply(ex, "Failed to access fingerprint: " + ex.Message);
+                return new FingerprintResult
+                {
+                    Status = FingerprintCheckStatus.Failed,
+                    ErrorMessage = ex.Message
+                };
             }
         }
     }
