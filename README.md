@@ -28,7 +28,7 @@ Call `Zebble.Device.Fingerprint` from any project to gain access to APIs.
 
 ##### Authenticate:
 ```csharp
-var result = await Zebble.Device.Fingerprint.Authenticate("some reason");
+var result = await Zebble.Device.Fingerprint.Authenticate(new FingerprintRequestConfig("My App", "some reason"));
 ```
 ##### Check availability:
 ```csharp
@@ -40,5 +40,5 @@ var result = await Zebble.Device.Fingerprint.IsAvailable();
 ### Methods
 | Method       | Return Type  | Parameters                          | Android | iOS | Windows |
 | :----------- | :----------- | :-----------                        | :------ | :-- | :------ |
-| Authenticate         | Task<FingerprintResult&gt;| reason -> string<br> requestConfig -> FingerprintRequestConfig<br> errorAction -> OnError| x       | x   | x       |
+| Authenticate         | Task<FingerprintResult&gt;| request -> FingerprintRequestConfig<br> errorAction -> OnError| x       | x   | x       |
 | IsAvailable   | Task<bool&gt; | allowAlternativeAuthentication -> bool | x | x | x |
