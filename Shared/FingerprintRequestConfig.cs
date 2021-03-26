@@ -12,15 +12,15 @@
         public string CancelTitle { get; set; }
         public string FallbackTitle { get; set; }
         public FingerprintRequestHelpTexts HelpTexts { get; }
-        public bool AllowAlternativeAuthentication { get; set; }
+        public bool AllowAlternativeAuth { get; set; }
         public CancellationToken CancellationToken { get; set; }
 
         public FingerprintRequestConfig(string title, string reason)
         {
-            if (Title.IsEmpty())
+            if (title.IsEmpty())
                 throw new ArgumentNullException(nameof(Title));
 
-            if (Reason.IsEmpty())
+            if (reason.IsEmpty())
                 throw new ArgumentNullException(nameof(Reason));
 
             Reason = reason;
@@ -42,7 +42,7 @@
                     Insufficient = HelpTexts.Insufficient,
                     Dirty = HelpTexts.Dirty,
                 },
-                AllowAlternativeAuthentication = AllowAlternativeAuthentication
+                AllowAlternativeAuthentication = AllowAlternativeAuth
             };
         }
     }

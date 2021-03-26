@@ -6,7 +6,7 @@
     {
         static Fingerprint()
         {
-            CrossFingerprint.SetCurrentActivityResolver(() => UIRuntime.CurrentActivity);
+            Thread.UI.Run(() => CrossFingerprint.SetCurrentActivityResolver(() => UIRuntime.CurrentActivity));
         }
     }
 }

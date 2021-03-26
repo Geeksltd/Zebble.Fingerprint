@@ -6,7 +6,7 @@
 
     public static partial class Fingerprint
     {
-        public static Task<bool> IsAvailable(bool allowAlternativeAuthentication)
+        public static Task<bool> IsAvailable(bool allowAlternativeAuthentication = false)
         {
             return CrossFingerprint.Current.IsAvailableAsync(allowAlternativeAuthentication);
         }
@@ -18,10 +18,13 @@
 
             try
             {
-                var config = request.ToConfiguration();
-                var result = await CrossFingerprint.Current.AuthenticateAsync(config, request.CancellationToken);
+                return await Thread.UI.Run(async () =>
+                {
+                    var config = request.ToConfiguration();
+                    var result = await CrossFingerprint.Current.AuthenticateAsync(config, request.CancellationToken);
 
-                return FingerprintResult.From(result);
+                    return FingerprintResult.From(result);
+                });
             }
             catch (Exception ex)
             {
